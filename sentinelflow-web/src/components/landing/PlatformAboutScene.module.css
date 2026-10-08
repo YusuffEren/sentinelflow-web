@@ -1,0 +1,78 @@
+.scene {
+  position: relative;
+  background: var(--scene-paper, #101319);
+  color: var(--scene-ink, #fff);
+  isolation: isolate;
+  transition: background-color 650ms ease, color 650ms ease;
+}
+
+.anchor { position: absolute; width: 1px; height: 1px; pointer-events: none; }
+.stage { position: sticky; top: 0; overflow: clip; }
+.audience { position: absolute; inset: 0 0 auto; transform-origin: top; color: #fff; will-change: transform, opacity; }
+.audienceGrid, .about { width: 100%; max-width: 1600px; margin-inline: auto; padding-inline: 4.7vw; }
+.audienceGrid { display: grid; grid-template-columns: 265px minmax(0, 1fr); gap: 64px; padding-top: 64px; }
+.index > span { display: block; color: #df7158; font-size: 13px; }
+.index > p { margin-top: 4px; font-size: 18px; line-height: 1; letter-spacing: -.02em; }
+.marqueeWindow { overflow: hidden; }
+.marquee { display: flex; width: max-content; animation: audience-marquee 28s linear infinite; will-change: transform; }
+.marqueeGroup { display: flex; }
+.audienceMark { display: flex; flex-shrink: 0; align-items: center; gap: 12px; width: clamp(230px, 24vw, 340px); color: #ffffffd1; }
+.audienceMark > span:last-child { white-space: nowrap; font-size: clamp(1.25rem, 1.8vw, 1.75rem); font-weight: 500; letter-spacing: -.045em; }
+.mark { position: relative; display: grid; width: 36px; height: 36px; place-items: center; flex-shrink: 0; }
+.mark i { position: absolute; display: block; }
+.circle { width: 20px; height: 20px; border: 2px solid currentColor; border-radius: 50%; }
+.dot { right: 0; top: 4px; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.diamond { width: 12px; height: 12px; border: 1px solid currentColor; transform: rotate(45deg); }
+.diamondOuter { width: 28px; height: 28px; border: 1px solid currentColor; transform: rotate(45deg); opacity: .5; }
+.bars { width: 28px; height: 20px; border-block: 2px solid currentColor; transform: skewY(-12deg); }
+.diagonal { width: 28px; height: 1px; background: currentColor; transform: rotate(45deg); }
+.square { width: 28px; height: 28px; border: 2px solid currentColor; border-radius: 3px; }
+.squareInner { width: 8px; height: 8px; background: currentColor; }
+
+.about { position: relative; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 32px; padding-block: 56px 72px; will-change: transform, opacity; }
+.visual { transform-origin: top left; will-change: transform; }
+.image { position: relative; margin-top: 8px; aspect-ratio: 1.5; overflow: hidden; }
+.photograph { object-fit: cover; object-position: 69% 53%; filter: grayscale(1); }
+.image > span { position: absolute; inset: 0; background: #4563aa1f; mix-blend-mode: color; }
+.visual > p { max-width: 245px; margin-top: 12px; color: var(--scene-muted); font-size: 14px; line-height: 1.35; }
+.copy { padding-top: 32px; will-change: transform, opacity; }
+.copy > p { max-width: 980px; font-size: clamp(2.45rem, 3.6vw, 4.15rem); font-weight: 300; line-height: 1.04; letter-spacing: -.045em; }
+.copy > p > span { transition: color 75ms linear; }
+.scene[data-palette="light"] .copy > p > span { transition: color 650ms ease; }
+.visual > p, .signature { transition: color 650ms ease; }
+.signatureLine { transition: background-color 650ms ease; }
+.signature { display: flex; align-items: center; gap: 22px; margin-top: 48px; font-size: 11px; color: var(--scene-muted); }
+.signatureLine { height: 1px; flex: 1; background: var(--scene-rule); }
+
+@keyframes audience-marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 1023px) {
+  .audienceGrid, .about { padding-inline: 32px; }
+  .audienceGrid { grid-template-columns: 220px minmax(0, 1fr); gap: 28px; }
+  .about { grid-template-columns: 1fr; gap: 36px; padding-bottom: 52px; }
+  .visual { display: none; }
+  .copy { padding-top: 0; }
+  .copy > p { max-width: 840px; font-size: clamp(2.15rem, 4.8vw, 3.4rem); line-height: 1.07; }
+  .signature { margin-top: 34px; }
+}
+
+@media (max-width: 639px) {
+  .audienceGrid, .about { padding-inline: 20px; }
+  .audienceGrid { grid-template-columns: 1fr; gap: 42px; padding-top: 56px; }
+  .about { gap: 34px; padding-block: 48px; }
+  .copy > p { font-size: clamp(1.9rem, 7.6vw, 2.8rem); line-height: 1.1; letter-spacing: -.04em; }
+  .signature { gap: 14px; margin-top: 28px; font-size: 10px; }
+  .index > p { font-size: 17px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene { height: auto !important; background: #efeeea; color: #171b23; }
+  .anchor { top: 180px !important; }
+  .stage { position: relative; overflow: visible; }
+  .audience { position: relative; opacity: 1 !important; transform: none !important; background: #101319; padding-bottom: 56px; }
+  .marquee { animation: none; }
+  .about, .copy, .visual { transform: none !important; opacity: 1 !important; }
+  .copy > p > span { color: #171b23 !important; transition: none; }
+  .visual > p, .signature { color: #696b70; }
+  .signatureLine { background: #c9cac9; }
+}
